@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:dashboard/UI/general/generalWidgets.dart';
 import 'package:dashboard/fbAPI/sharedApi.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'Sign up.dart';
-import 'timeline.dart';
 
 class MobileStep extends StatefulWidget {
   @override
@@ -32,7 +30,7 @@ class _MobileStepState extends State<MobileStep> {
 
         querySnapshot.docs.length == 0
             ? buildErrorToast(
-                context, Theme.of(context), "This email is not exist ")
+                context, Theme.of(context), "  This email is not exist ")
             : checkPassword(querySnapshot.docs[0].data());
         docId = querySnapshot.docs[0].id;
       });
@@ -44,7 +42,7 @@ class _MobileStepState extends State<MobileStep> {
   }
 
   checkPassword(Map userData) {
-    if (userData["password"]==password.text.trim()) {
+    if (userData["password"] == password.text.trim()) {
       enterAppAgainAsUser(userData, context, Theme.of(context));
     } else {
       buildErrorToast(
@@ -85,7 +83,7 @@ class _MobileStepState extends State<MobileStep> {
             textAlign: TextAlign.center,
             style: TextStyle(
               color: theme.canvasColor.withOpacity(0.8),
-              fontSize: 19,
+              fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -174,7 +172,7 @@ class _MobileStepState extends State<MobileStep> {
                           color: theme.canvasColor,
                           size: 30,
                         ),
-                        hintText:"Password",
+                        hintText: "Password",
                         hintStyle: TextStyle(
                             color: theme.canvasColor.withOpacity(0.8),
                             fontSize: 16,
@@ -187,81 +185,44 @@ class _MobileStepState extends State<MobileStep> {
                   ),
                 ),
               ),
-              Column(
-               children: [
-                 Padding(
-                   padding: const EdgeInsets.all(40.0),
-                   child: InkWell(
-                     onTap: () {
-                       if (email.text.trim().isNotEmpty &&
-                           password.text.trim().isNotEmpty) {
-                         buildLoadingDialog(context, theme);
-                         isThereInternet().then((value) {
-                           if (value) {
-                             checkIfUserFound();
-                           } else {
-                             Navigator.of(context, rootNavigator: true).pop();
-                             buildInternetErrorToast(context, theme);
-                           }
-                         });
-                       }
-                       if(email.text.trim().isEmpty &&
-                           password.text.trim().isEmpty){
-                         buildErrorToast(
-                             context, Theme.of(context), 'in valid email and password is not correct');
-                       }
-                     },
-                     child: Container(
-                       decoration: BoxDecoration(
-                           color: theme.accentColor,
-                           borderRadius: BorderRadius.circular(10),
-                           border: Border.all(
-                               width: 1,
-                               color: theme.canvasColor.withOpacity(0.5))),
-                       child: Padding(
-                         padding:
-                         EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-                         child: Text(
-                           " Login",
-                           style: TextStyle(
-                               color: theme.canvasColor,
-                               fontSize: 18,
-                               fontWeight: FontWeight.bold),
-                           textAlign: TextAlign.center,
-                         ),
-                       ),
-                     ),
-                   ),
-                 ),
-                 Padding(
-                   padding: const EdgeInsets.all(40.0),
-                   child: InkWell(
-                     onTap: () {
-                       Navigator.of(context).push(MaterialPageRoute(builder:(context) =>  Signup()));
-                     },
-                     child: Container(
-                       decoration: BoxDecoration(
-                           color: theme.accentColor,
-                           borderRadius: BorderRadius.circular(10),
-                           border: Border.all(
-                               width: 1,
-                               color: theme.canvasColor.withOpacity(0.5))),
-                       child: Padding(
-                         padding:
-                         EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-                         child: Text(
-                           " Sign up",
-                           style: TextStyle(
-                               color: theme.canvasColor,
-                               fontSize: 18,
-                               fontWeight: FontWeight.bold),
-                           textAlign: TextAlign.center,
-                         ),
-                       ),
-                     ),
-                   ),
-                 ),
-               ],
+              Padding(
+                padding: const EdgeInsets.all(40.0),
+                child: InkWell(
+                  onTap: () {
+                    if (email.text.trim().isNotEmpty &&
+                        password.text.trim().isNotEmpty) {
+                      buildLoadingDialog(context, theme);
+                      isThereInternet().then((value) {
+                        if (value) {
+                          checkIfUserFound();
+                        } else {
+                          Navigator.of(context, rootNavigator: true).pop();
+                          buildInternetErrorToast(context, theme);
+                        }
+                      });
+                    }
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: theme.accentColor,
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                            width: 1,
+                            color: theme.canvasColor.withOpacity(0.5))),
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                      child: Text(
+                        " Login",
+                        style: TextStyle(
+                            color: theme.canvasColor,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ],
           ),

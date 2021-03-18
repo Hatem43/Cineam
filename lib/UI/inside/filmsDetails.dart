@@ -101,7 +101,7 @@ class _FilmDetailsState extends State<FilmDetails> {
                   "${widget.filmMap["description"]}",
                   textDirection: TextDirection.ltr,
                   style: TextStyle(
-                      color: Colors.black,
+                      color: theme.canvasColor,
                       fontSize: 16,
                       fontWeight: FontWeight.bold),
                   textAlign: TextAlign.left,
@@ -116,7 +116,7 @@ class _FilmDetailsState extends State<FilmDetails> {
                         fontWeight: FontWeight.bold),
                     textAlign: TextAlign.left),
                 title: Text(
-                  "Movie Time :  ",
+                  "Time Movie :  ",
                   textDirection: TextDirection.ltr,
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -146,7 +146,7 @@ class _FilmDetailsState extends State<FilmDetails> {
                               child: Text(
                                 "Book Now",
                                 style: TextStyle(
-                                    color: Colors.black,
+                                    color: Colors.red,
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold),
                                 textAlign: TextAlign.center,

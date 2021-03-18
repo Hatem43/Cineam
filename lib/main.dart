@@ -23,7 +23,7 @@ class _MyAppState extends State<MyApp> {
     ]);
     return MaterialApp(
       theme: ThemeData(
-        primaryColor: Colors.blue,
+        primaryColor: Colors.black,
         accentColor: Colors.grey.shade900,
         canvasColor: Colors.white,
         fontFamily: "cairo",
