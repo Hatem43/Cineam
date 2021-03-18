@@ -51,6 +51,7 @@ class _ChairsState extends State<Chairs> {
                 onTap: () async {
                   setState(() {
                     chosenChairsInDatabase.addAll(chosenChairs);
+
                   });
 
                   buildLoadingDialog(context, theme);
@@ -73,7 +74,7 @@ class _ChairsState extends State<Chairs> {
                     size: 35,
                   ),
                 ),
-              )
+              ),
       ],
       leading: InkWell(
         onTap: () {
@@ -81,7 +82,7 @@ class _ChairsState extends State<Chairs> {
         },
         child: Icon(
           Icons.arrow_back_ios,
-          color: theme.canvasColor,
+          color:Colors.black,
           size: 30,
         ),
       ),
@@ -89,8 +90,8 @@ class _ChairsState extends State<Chairs> {
         title,
         textAlign: TextAlign.center,
         style: TextStyle(
-            color: theme.canvasColor,
-            fontSize: 20,
+            color:Colors.black,
+            fontSize: 22,
             fontWeight: FontWeight.bold),
       ),
     );
@@ -101,6 +102,7 @@ class _ChairsState extends State<Chairs> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     ThemeData theme = Theme.of(context);
+    Color color=Colors.white;
     return Scaffold(
       appBar: buildAppBar(
           theme, width, false, "${widget.filmMap["title"]}", context),
@@ -117,7 +119,7 @@ class _ChairsState extends State<Chairs> {
               Padding(
                 padding: EdgeInsets.all(width / 20),
                 child: GridView.builder(
-                    itemCount: 47,
+                    itemCount: 48,
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
                     physics: ScrollPhysics(parent: ScrollPhysics()),
@@ -127,14 +129,18 @@ class _ChairsState extends State<Chairs> {
                       return Padding(
                         padding: const EdgeInsets.all(6.0),
                         child: InkWell(
+
                           onTap: () {
                             if (widget.userType == "user" &&
                                 chosenChairsInDatabase.indexOf("S $index") ==
                                     -1) {
                               setState(() {
-                                chosenChairs.indexOf("S $index") == -1
-                                    ? chosenChairs.add("S $index")
-                                    : chosenChairs.remove("S $index");
+                                if(chosenChairs.indexOf("S $index") == -1) {
+                                  chosenChairs.add("S $index");
+                                }
+                                     else{
+                                  chosenChairs.remove("S $index");
+                                 }
                               });
                             }
                           },
@@ -144,18 +150,18 @@ class _ChairsState extends State<Chairs> {
                                             .indexOf("S $index") ==
                                         -1
                                     ? chosenChairs.indexOf("S $index") == -1
-                                        ? theme.primaryColor
-                                        : Colors.red
+                                        ? Colors.red
+                                        : Colors.brown
                                     : Colors.amberAccent,
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all(
                                     width: 1, color: theme.canvasColor)),
                             child: Center(
                               child: Text(
-                                "S $index",
+                                "$index",
                                 style: TextStyle(
                                     color: theme.canvasColor,
-                                    fontSize: 12,
+                                    fontSize: 15,
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -192,7 +198,7 @@ class _ChairsState extends State<Chairs> {
                                     color: Colors.red,
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold),
-                                textAlign: TextAlign.center,
+                                    textAlign: TextAlign.center,
                               ),
                             ),
                           ),
